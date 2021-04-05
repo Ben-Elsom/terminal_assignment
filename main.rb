@@ -42,6 +42,32 @@ charisma = gets.chomp.to_i
 # make sure all of these traits are less than 20
 
 
+puts "choose your opening line"
+puts "1. 'You look stunning' "
+puts "2. 'Oh, you looked better in your pictures' "
+puts "3. *Go in for the kiss* (Charisma check: #{0.70} chance of success)"
+puts "4. 'Hey, nice to meet you' "
+ask_for_number
+response = gets.chomp.to_i
+
+case response
+when 1 
+    flirt_score += 3
+    puts "hehehe thank you, you look pretty good yourself"
+when 2
+    flirt_score -= 3
+    puts " 'damn ok dude' "
+when 3 
+    # make chance that will fail
+    flirt_score += 10
+    puts "*kisses* 'wow that was nice'"
+when 4 
+    flirt_score += 1 
+    puts "nice to meet you too"
+# error handling 
+when 5 
+    ask_number
+end 
 
 # puts "Pick your opening line "
 # puts ""

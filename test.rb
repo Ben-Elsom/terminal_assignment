@@ -24,50 +24,104 @@ end
 
 
 class Person
-    
+    attr_reader :question2, :question3
     def initialize(gender, name, traits)
         @gender = gender,
         @name = name,
         @trait = traits,
         @flirt_score = 0
+        generate_questions()
+    end
+    def generate_questions
+        # CSV magic
+        # question,outputA,traitA,scoreA,resonseA, outputB,traitB,scoreB,resonseA
+        # Do you come here often?,All the time I love to party,loves to party,3,oh that's cool,Nah,,0,oh ok
+        
+        # CSV.open |line|
+        #     questions.push({
+            #         question: line[0],
+            #         options: {
+                #             A: {
+                    #                 selection: "a",
+                    #                 output: line[1],
+                    #                 trait: line[2]
+                #             }, B: { line[3], lin[4]}
+                    #         }
+                    #     })
+                    
+    # Do you come here often?,All the time I love to party|loves to party|3|oh that's cool,Nah||0|oh ok, |||, |||
+        # CSV.open |line|
+            # options = []
+            # # line.slice(1)
+            # arrays = [line[1], line[2], line[3], line[4]]
+            # arrays.each_with_index do |subarray, index|
+            #     selection = nil
+            #     if index == 0
+            #         selection = "a"
+            #     else
+            #         selection = "b"
+            #     end
+            #     subarray.split!("|")
+            #     options.push({
+            #         selection: selection,
+            #         output: subarray[0],
+            #         trait: subarray[1],
+            #         score: subarray[2],
+            #         response: subarray[3]
+            #     })
+            # end
+            # questions.push({
+            #     question: line[0],
+            #     options: options
+            # })
+
+        @question2 = {
+            question: "Do you come here often?", 
+            options: {
+                A: {
+                    selection: "a",
+                    output: "All the time, I love to party",
+                    trait: "loves to party",
+                    score: 3,
+                    # special_score: 10, 
+                    response: "oh that's cool",
+                    # special_response: “Omg I love to party too, that’s so cool”,
+                    },
+                {
+                    selection: "b",
+                    output: "Nah",
+                    response: "Oh ok",
+                    score: 0,
+                },
+                {   selection: "c",
+                    output: "I own the place (lie) (requires Charisma 10)",
+                    score: 10,
+                    response: "WOW that is super impressive!",
+                    # failed_score: -5,
+                    # failed_response: “Urgh why do you feel the need to lie to me”,
+                },
+                {   selection: "d",
+                    output: "Only for special occasions",
+                    score: 3,
+                    response: "I guess I am special then hehe",
+                }
+            }
+        }
     end 
 
-    question2 = {question: "Do you come here often?", options: [
-        {
-            selection: "a",
-            output: "All the time, I love to party",
-            trait: "loves to party",
-            score: 3,
-            # special_score: 10, 
-            response: "oh that's cool",
-            # special_response: “Omg I love to party too, that’s so cool”,
-            },
-        {
-            selection: "b",
-            output: "Nah",
-            response: "Oh ok",
-            score: 0,
-        },
-        {   selection: "c",
-            output: "I own the place (lie) (requires Charisma 10)",
-            score: 10,
-            response: "WOW that is super impressive!",
-            # failed_score: -5,
-            # failed_response: “Urgh why do you feel the need to lie to me”,
-        },
-        {   selection: "d",
-            output: "Only for special occasions",
-            score: 3,
-            response: "I guess I am special then hehe",
-        }
-        ]
-        }
+    def update_flirt(score)
+        @flirt_score += score
+    end
 end 
+
+    
 
 date = Person.new(gender, traits.sample(2), date_name)
 
-puts question2[:question]
+p date.question2[:question]
     
 response = gets.chomp.upcase.to_sym
-puts @@question2[:options][response][:output]
-@flirt_score += @@question2[:options][response][:score]
+puts date.question2[:options][response][:output]
+date.flirt_score += date.question2[:options][response][:score]
+
+puts date.flirt_score

@@ -48,33 +48,31 @@ class Person
             @flirt_score += question[:options][response][:score]
         end
 
-    question2 = {question: "Do you come here often?". options: [
+    question2 = {
+        question: "Do you come here often?", options: {
         A: {
             output: "All the time, I love to party",
             trait: "loves to party",
             score: 3,
             # special_score: 10, 
-            response: “oh thats cool”,
+            response: "oh thats cool",
             # special_response: “Omg I love to party too, that’s so cool”,
-            }
-        B: {
+        }, B: {
             output: "Nah"
             response: "Oh ok"
             score: 0,
-        }
-        C: {
+        }, C: {
             output: "I own the place (lie) (requires Charisma 10)"
             score: 10,
             response: "WOW that is super impressive!",
             # failed_score: -5,
             # failed_response: “Urgh why do you feel the need to lie to me”,
-        }
-        D: {
+        }, D: {
             output: "Only for special occasions"
             score: 3,
             response: “I guess I am special then hehe”
         }
-    ]}
+    }
     end 
 end 
 

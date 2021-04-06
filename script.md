@@ -1,5 +1,5 @@
-Choose your opening line 
 
+Choose your opening line 
     
 -   "You look stunning"     +3
         “hehehe thank you, you look pretty good yourself”

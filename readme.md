@@ -52,14 +52,23 @@ If they buy a drink for their partner it will increase their flirt score.
 
 ## Develop an outline of the user interaction and experience for the application.
 Your outline must include:
-- how the user will find out how to interact with / use each feature
+- How the user will find out how to interact with / use each feature
+At the start up of the game the users will be presented a set of rules that will outline: how to play the game, how to enter in your choices and how each of the features work.
 - how the user will interact with / use each feature
+Attributes - the users will choose how many points they would like to enter into each of their attributes by typing the number when prompted by the app. The app will ask "how much would you like to put into Strength?" then the user will just add the number they want. Then after each input there will be a validation checker that will ensure they have not run out of point and the inout is not greater than the maximum allowed (10)
+
+Change in the partners interests - This feature does not require the user to do anything other than rememeber the interests from the start of the game and keep them in mind when picking their response. 
+
+Money to buy drinks - When the user is selecting their response they can choice an option that says "lets get a drink". This will then take the user to a new set of dialogue options that will allow the user to either; Buy themselves a drink, buy their date a drink, buy themselves a red bull or leave the bar. They will decide how they wish to act by picking the number thar corresponds with the choice they wish to pick.
+
+
 - how errors will be handled by the application and displayed to the user
 
-
+If the user was to input an invalid number/ response the application the application would say "#{input} was an invalid response. please try again.
 
 ## Develop a diagram which describes the control flow of your application. Your diagram must:
 - show the workflow/logic and/or integration of the features in your application for each feature.
+
 - utilise a recognised format or set of conventions for a control flow diagram, such as UML.
 
 

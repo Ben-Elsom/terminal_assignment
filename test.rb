@@ -94,6 +94,7 @@ class Person
                 }
             }
     end
+# end of initalize
 
     def mood
         case @flirt_score
@@ -111,80 +112,96 @@ class Person
     end 
 
     def ask_number
-    if @flirt_score >= 50
-        puts "Yeah ok, I'll give you my number. One final question though. \nWhat's my name?"
-        name_guess = gets.chomp.capitalize
-        if name_guess == @name
-            puts "'Ok, yeah you can have my number. Here you go' *give number*"
-            puts "YOU WIN!"
-            exit
-        else 
-            puts "my name is #{@name}"
-            puts "I can't believe I was going to give you my number. Get lost"
+        if @flirt_score >= 50
+            puts "Yeah ok, I'll give you my number. One final question though. \nWhat's my name?"
+            name_guess = gets.chomp.capitalize
+            if name_guess == @name
+                puts "'Ok, yeah you can have my number. Here you go' *give number*"
+                puts "YOU WIN!"
+                exit
+            else 
+                puts "my name is #{@name}"
+                puts "I can't believe I was going to give you my number. Get lost"
+                puts "YOU LOSE!"
+                exit
+            end
+        else
+            puts "Ha! as if. Get lost"
             puts "YOU LOSE!"
             exit
         end
-    else 
-    puts "Ha! as if. Get lost"
-    puts "YOU LOSE!"
-    exit
     end
-end
-
 
     def update_flirt(score)
         @flirt_score += score
     end
-
 end 
+
 
 date = Person.new(gender, date_name, traits.sample(2))
 puts "\nYour date for this evening is #{date.name}. #{date.name} is interested in #{date.trait[0]} and #{date.trait[1]}"
 
-puts "Do you come here often?"
 
-puts "A= 'All the time, I love to party'"
-puts "B= 'Nah'"
-puts "C= 'I own the place' (lie) (requires Charisma 10)"
-puts "D= 'Only for special occasions'"
-puts "E= *ask for number*"
+valid_input = false
+until valid_input 
+    puts "Please choose your skills for tonight (max 20)"
+    puts "How much Strength would you like (max 10)"
+    strength = gets.chomp.to_i
+    puts "How much Intelligence would you like (max 10)"
+    intelligence = gets.chomp.to_i
+    puts "How much Charisma would you like (max 10)"
+    charisma = gets.chomp.to_i
 
-selection = gets.chomp.upcase.to_sym
-
-if selection == :E
-    date.ask_number
-else
-    puts "You: #{date.question2[:options][selection][:output]}"
-
-    if date.trait.include?(date.question2[:options][selection][:trait])
-        puts "Date: #{date.question2[:options][selection][:special_response]}"
-        date.update_flirt(date.question2[:options][selection][:special_score])
-        puts date.flirt_score
-    else
-    puts "Date: #{date.question2[:options][selection][:response]}"
-    date.update_flirt(date.question2[:options][selection][:score])
-    date.flirt_score
+    if strength + intelligence + charisma > 20 
+        puts "you have entered in too many skill points. Please try again"
+    else 
+        valid_input = true
     end
-    
 end
+# puts "Do you come here often?"
+
+# puts "A= 'All the time, I love to party'"
+# puts "B= 'Nah'"
+# puts "C= 'I own the place' (lie) (requires Charisma 10)"
+# puts "D= 'Only for special occasions'"
+# puts "E= *ask for number*"
+
+# selection = gets.chomp.upcase.to_sym
+
+# if selection == :E
+#     date.ask_number
+# else
+#     puts "You: #{date.question2[:options][selection][:output]}"
+
+#     if date.trait.include?(date.question2[:options][selection][:trait])
+#         puts "Date: #{date.question2[:options][selection][:special_response]}"
+#         date.update_flirt(date.question2[:options][selection][:special_score])
+#         puts date.flirt_score
+#     else
+#     puts "Date: #{date.question2[:options][selection][:response]}"
+#     date.update_flirt(date.question2[:options][selection][:score])
+#     date.flirt_score
+#     end
+    
+# end
 
 
-# Question 2
+# # Question 2
 
-puts "'Do you work out?'"
+# puts "'Do you work out?'"
 
-puts "A= 'All the time, I love exercise'(req strength 4)"
-puts "B= 'No'"
-puts "C= *Flexs* (req strength 6)"
-puts "D= 'yeah I enjoy it but it can be a bit boring by myself'"
+# puts "A= 'All the time, I love exercise'(req strength 4)"
+# puts "B= 'No'"
+# puts "C= *Flexs* (req strength 6)"
+# puts "D= 'yeah I enjoy it but it can be a bit boring by myself'"
 
-selection = gets.chomp.upcase.to_sym
+# selection = gets.chomp.upcase.to_sym
 
-puts date.question3[:options][selection][:output]
-puts date.question3[:options][selection][:response]
-date.update_flirt(date.question3[:options][selection][:score])
+# puts date.question3[:options][selection][:output]
+# puts date.question3[:options][selection][:response]
+# date.update_flirt(date.question3[:options][selection][:score])
 
-date.mood
+# date.mood
 
 
 

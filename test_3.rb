@@ -38,8 +38,8 @@ class Person
         @strength = 0
         @intelligence = 0
         @charisma = 0
-        @question2 = {
-            options: {
+        @questions = {
+            question1: {
                 A: {
                     output: "You: 'All the time, I love to party'",
                     trait: "Partying",
@@ -77,9 +77,8 @@ class Person
                     req_intelligence: 0,
                     req_charisma: 0,
                 }
-            }
-        }
-        @question3 = {
+            },
+        question2: {
                 options: {
                     A: {
                         output: "All the time, I love exercise",
@@ -169,26 +168,26 @@ date = Person.new(gender, date_name, traits.sample(2) )
 puts "\nYour date for this evening is #{date.name}. #{date.name} is interested in #{date.trait[0]} and #{date.trait[1]}"
 
 
-valid_input = false
-until valid_input 
-    puts "Please choose your skills for tonight (max 20)"
-    puts "How much Strength would you like (max 10)"
-    strength = gets.chomp.to_i
-    puts "How much Intelligence would you like (max 10)"
-    intelligence = gets.chomp.to_i
-    puts "How much Charisma would you like (max 10)"
-    charisma = gets.chomp.to_i
+# valid_input = false
+# until valid_input 
+#     puts "Please choose your skills for tonight (max 20)"
+#     puts "How much Strength would you like (max 10)"
+#     strength = gets.chomp.to_i
+#     puts "How much Intelligence would you like (max 10)"
+#     intelligence = gets.chomp.to_i
+#     puts "How much Charisma would you like (max 10)"
+#     charisma = gets.chomp.to_i
 
-    if strength + intelligence + charisma > 20 
-        puts "you have entered in too many skill points. Please try again"
-    else 
-        valid_input = true
-    end
-end
+#     if strength + intelligence + charisma > 20 
+#         puts "you have entered in too many skill points. Please try again"
+#     else 
+#         valid_input = true
+#     end
+# end
 
-date.strength += strength 
-date.intelligence += intelligence 
-date.charisma += charisma
+# date.strength += strength 
+# date.intelligence += intelligence 
+# date.charisma += charisma
 
 puts "Do you come here often?"
 
@@ -200,81 +199,40 @@ puts "E= *ask for number*"
 
 selection = gets.chomp.upcase.to_sym
 
-if selection == :E
-    date.ask_number
-else
-
-    puts "You: #{date.question2[:options][selection][:output]}"
-
-
-    if date.strength < date.question2[:options][selection][:req_strength] 
-        puts "Date: #{date.question2[:options][selection][:failed_response]}"
-        date.update_flirt(date.question2[:options][selection][:failed_score])
-    elsif date.intelligence < date.question2[:options][selection][:req_intelligence]
-        puts "Date: #{date.question2[:options][selection][:failed_response]}"
-        date.update_flirt(date.question2[:options][selection][:failed_score])
-    elsif date.charisma < date.question2[:options][selection][:req_charisma]
-        puts "Date: #{date.question2[:options][selection][:failed_response]}"
-        date.update_flirt(date.question2[:options][selection][:failed_score])
-    else
-    
-
-        if date.trait.include?(date.question2[:options][selection][:trait])
-            puts "Date: #{date.question2[:options][selection][:special_response]}"
-            date.update_flirt(date.question2[:options][selection][:special_score])
-            puts date.flirt_score
-        else
-            puts "Date: #{date.question2[:options][selection][:response]}"
-            date.update_flirt(date.question2[:options][selection][:score])
-            date.flirt_score
-        end
-end
-
-end
-puts date.flirt_score
-
-# Question 2
-
-puts "'Do you work out?'"
-
-puts "A= 'All the time, I love exercise'(req strength 4)"
-puts "B= 'No'"
-puts "C= *Flexs* (req strength 6)"
-puts "D= 'yeah I enjoy it but it can be a bit boring by myself'"
-puts "E= *ask for number*"
-
-selection = gets.chomp.upcase.to_sym
-
-if selection == :E
-    date.ask_number
-else
-
-    puts "You: #{date.question3[:options][selection][:output]}"
+    loop date.questions do |current_question, values|
+        puts "A= #{values[:A][:output]}"
+        puts "B= #{values[:B][:output]}"
+        puts "C= #{values[:C][:output]]}"
+        puts "D= #{values[:D][:output]}"
+        puts "E= *ask for number*"
+        selection = gets.chomp.upcase.to_sym
+    end
 
 
-    if date.strength < date.question3[:options][selection][:req_strength] 
-        puts "Date: #{date.question3[:options][selection][:failed_response]}"
-        date.update_flirt(date.question3[:options][selection][:failed_score])
-    elsif date.intelligence < date.question3[:options][selection][:req_intelligence]
-        puts "Date: #{date.question3[:options][selection][:failed_response]}"
-        date.update_flirt(date.question3[:options][selection][:failed_score])
-    elsif date.charisma < date.question3[:options][selection][:req_charisma]
-        puts "Date: #{date.question3[:options][selection][:failed_response]}"
-        date.update_flirt(date.question3[:options][selection][:failed_score])
-    else
-    
+#         puts "You: #{date.questions[:question1][selection][:output]}"
 
 
-        if date.trait.include?(date.question3[:options][selection][:trait])
-            puts "Date: #{date.question3[:options][selection][:special_response]}"
-            date.update_flirt(date.question3[:options][selection][:special_score])
-            puts date.flirt_score
-        else
-            puts "Date: #{date.question3[:options][selection][:response]}"
-            date.update_flirt(date.question3[:options][selection][:score])
-            date.flirt_score
-        end
-end
+#         if date.strength < date.question2[:options][selection][:req_strength] 
+#             puts "Date: #{date.question2[:options][selection][:failed_response]}"
+#             date.update_flirt(date.question2[:options][selection][:failed_score])
+#         elsif date.intelligence < date.question2[:options][selection][:req_intelligence]
+#             puts "Date: #{date.question2[:options][selection][:failed_response]}"
+#             date.update_flirt(date.question2[:options][selection][:failed_score])
+#         elsif date.charisma < date.question2[:options][selection][:req_charisma]
+#             puts "Date: #{date.question2[:options][selection][:failed_response]}"
+#             date.update_flirt(date.question2[:options][selection][:failed_score])
+#         else
+        
 
-
+#             if date.trait.include?(date.question2[:options][selection][:trait])
+#                 puts "Date: #{date.question2[:options][selection][:special_response]}"
+#                 date.update_flirt(date.question2[:options][selection][:special_score])
+#                 puts date.flirt_score
+#             else
+#                 puts "Date: #{date.question2[:options][selection][:response]}"
+#                 date.update_flirt(date.question2[:options][selection][:score])
+#                 date.flirt_score
+#             end
+#         end
+#     end
 

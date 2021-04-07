@@ -274,7 +274,5 @@ else
             date.update_flirt(date.question3[:options][selection][:score])
             date.flirt_score
         end
+    end
 end
-
-
-

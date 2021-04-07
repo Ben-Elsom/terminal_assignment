@@ -13,9 +13,9 @@ flirt_score = 50
             puts "YOU LOSE!"
             exit
         end
-        puts "Ha! as if. Get lost"
-        puts "YOU LOSE!"
-        exit
+    puts "Ha! as if. Get lost"
+    puts "YOU LOSE!"
+    exit
     end
 end
 

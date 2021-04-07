@@ -1,7 +1,7 @@
 girl_names = ["Olivia", "Emma", "Ava", "Sophia", "Isabella", "Charlotte", "Amelia", "Mia", "Harper", "Evelyn"]
 boy_names = ["Liam", "Noah", "Oliver", "William", "James", "Benjamin", "Lucas"]
 unisex_names = ["Cameron", "Billie", "Kit", "Kai", "Riley", "Baily", "Charlie", "Drew"]
-traits = ["loves Naruto", "loves sport", "loves cats", "loves dogs", "loves exercise", "loves to party", "loves space", "loves cooking", "loves rick and Morty"]
+traits = ["Naruto", "Sport/exercise", "Cats", "Dogs", "Partying", "Outer-Space", "Cooking", "Rick and Morty"]
     
 
 
@@ -17,14 +17,15 @@ case gender
         date_name = unisex_names.sample
         gender = "unisex"
     else 
-        puts "you gave me '#{gender}' which is an invalid option, so i'm just going to pick a unisex name for you"
+        puts "\nYou gave me '#{gender}' which is an invalid option, so i'm just going to pick a unisex name for you"
         date_name = unisex_names.sample
         gender = "unisex"
 end
 
 
 class Person
-    attr_accessor :question2, :question3, :flirt_score
+    attr_accessor :flirt_score
+    attr_reader :name, :trait,:question2, :question3
 
     def initialize(gender, name, traits)
         @gender = gender
@@ -95,19 +96,39 @@ class Person
 
         case @flirt_score
         when 41..50 
-            puts "I think I can ask them for their number now"
+            puts "\nI think I can ask them for their number now"
         when 31..40 
-            puts "they look like they are having a fantastic time"
+            puts "\nThey look like they are having a fantastic time"
         when 21..30 
-            puts "they look like they're having fun"
+            puts "\nThey look like they're having fun"
         when 11..20 
-            puts "they look like they're having a good enough time"
+            puts "\nThey look like they're having a good enough time"
         when 0..10
-            puts "They look like they'd rather be somewhere else, but I guess I'll keep trying"
+            puts "\nThey look like they'd rather be somewhere else, but I guess I'll keep trying"
         end 
-    end
+    end 
 
-        
+    def ask_number
+    if @flirt_score >= 50
+        puts "Yeah ok, I'll give you my number. One final question though. \nWhat's my name?"
+        name_guess = gets.chomp.capitalize
+        if name_guess == @name
+            puts "'Ok, yeah you can have my number. Here you go' *give number*"
+            puts "YOU WIN!"
+            exit
+        else 
+            puts "my name is #{@name}"
+            puts "I can't believe I was going to give you my number. Get lost"
+            puts "YOU LOSE!"
+            exit
+        end
+    else 
+    puts "Ha! as if. Get lost"
+    puts "YOU LOSE!"
+    exit
+    end
+end
+
 
     def update_flirt(score)
         @flirt_score += score
@@ -115,9 +136,8 @@ class Person
 
 end 
 
-    
-
 date = Person.new(gender, date_name, traits.sample(2))
+puts "\nYour date for this evening is #{date.name}. #{date.name} is interested in #{date.trait[0]} and #{date.trait[1]}"
 
 puts "Do you come here often?"
 
@@ -125,14 +145,23 @@ puts "A= 'All the time, I love to party'"
 puts "B= 'Nah'"
 puts "C= 'I own the place' (lie) (requires Charisma 10)"
 puts "D= 'Only for special occasions'"
+puts "E= *ask for number*"
 
 selection = gets.chomp.upcase.to_sym
 
-puts "You: #{date.question2[:options][selection][:output]}"
-puts "Date: #{date.question2[:options][selection][:response]}"
-date.update_flirt(date.question2[:options][selection][:score])
+if selection == :E
+    date.ask_number
+else
+    puts "You: #{date.question2[:options][selection][:output]}"
 
-date.mood
+    
+    puts "Date: #{date.question2[:options][selection][:response]}"
+    date.update_flirt(date.question2[:options][selection][:score])
+    
+    date.mood
+    
+end
+
 
 # Question 2
 

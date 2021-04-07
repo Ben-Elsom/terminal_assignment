@@ -1,7 +1,10 @@
 girl_names = ["Olivia", "Emma", "Ava", "Sophia", "Isabella", "Charlotte", "Amelia", "Mia", "Harper", "Evelyn"]
 boy_names = ["Liam", "Noah", "Oliver", "William", "James", "Benjamin", "Lucas"]
 unisex_names = ["Cameron", "Billie", "Kit", "Kai", "Riley", "Baily", "Charlie", "Drew"]
-traits = ["Naruto", "Sport/exercise", "Cats", "Dogs", "Partying", "Outer-Space", "Cooking", "Rick and Morty"]
+traits = ["Dogs", "Partying"]
+
+
+# traits = ["Naruto", "Sport/exercise", "Cats", "Dogs", "Partying", "Outer-Space", "Cooking", "Rick and Morty"]
     
 
 
@@ -36,11 +39,11 @@ class Person
             options: {
                 A: {
                     output: "You: 'All the time, I love to party'",
-                    # trait: "loves to party",
+                    trait: "Partying",
                     score: 3,
-                    # special_score: 10, 
-                    response: "Date: 'oh that's cool'"
-                    # special_response: “Omg I love to party too, that’s so cool”,
+                    special_score: 10, 
+                    response: "Date: 'oh that's cool'",
+                    special_response: "Omg I love to party too! that’s so cool",
                     },
                 B:  {
                     output: "Nah",
@@ -93,7 +96,6 @@ class Person
     end
 
     def mood
-
         case @flirt_score
         when 41..50 
             puts "\nI think I can ask them for their number now"
@@ -154,11 +156,15 @@ if selection == :E
 else
     puts "You: #{date.question2[:options][selection][:output]}"
 
-    
+    if date.trait.include?(date.question2[:options][selection][:trait])
+        puts "Date: #{date.question2[:options][selection][:special_response]}"
+        date.update_flirt(date.question2[:options][selection][:special_score])
+        puts date.flirt_score
+    else
     puts "Date: #{date.question2[:options][selection][:response]}"
     date.update_flirt(date.question2[:options][selection][:score])
-    
-    date.mood
+    date.flirt_score
+    end
     
 end
 

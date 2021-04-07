@@ -63,7 +63,7 @@ Do you work out?
 
 
 
-        
+
 
 What do you do for a living 
 -	"I’m a student at Coder academy" (req intelligence 5)     + 5 if passed, minus 1 if failed.

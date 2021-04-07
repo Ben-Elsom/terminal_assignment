@@ -24,7 +24,7 @@ end
 
 
 class Person
-    attr_accessor :question2, :flirt_score
+    attr_accessor :question2, :question3, :flirt_score
 
     def initialize(gender, name, traits)
         @gender = gender
@@ -60,6 +60,35 @@ class Person
                 }
             }
         }
+        @question3 = {
+                options: {
+                    A: {
+                        output: "All the time, I love exercise",
+                        # trait: "loves to party",
+                        score: 3,
+                        # special_score: 10, 
+                        response: "'I can tell'"
+                        # special_response: “Omg I love to party too, that’s so cool”,
+                        },
+                    B:  {
+                        output: "'No'",
+                        response: "Oh ok",
+                        score: -3,
+                    },
+                    C:  {  
+                        output: "*Flexs* (req strength 5)",
+                        score: 5,
+                        response: "wow nice!"
+                        # failed_score: -5,
+                        # failed_response: “Urgh why do you feel the need to lie to me”,
+                    },
+                    D:  { 
+                        output: "Yeah I enjoy it but it can be a bit boring by myself.",
+                        score: 3,
+                        response: "'Well maybe I could join you one day'",
+                    }
+                }
+            }
     end
 
     def mood
@@ -83,6 +112,7 @@ class Person
     def update_flirt(score)
         @flirt_score += score
     end
+
 end 
 
     
@@ -98,24 +128,26 @@ puts "D= 'Only for special occasions'"
 
 selection = gets.chomp.upcase.to_sym
 
-puts date.question2[:options][selection][:output]
-puts date.question2[:options][selection][:response]
+puts "You: #{date.question2[:options][selection][:output]}"
+puts "Date: #{date.question2[:options][selection][:response]}"
 date.update_flirt(date.question2[:options][selection][:score])
 
 date.mood
 
-puts "Do you come here often?"
+# Question 2
 
-puts "A= 'All the time, I love to party'"
-puts "B= 'Nah'"
-puts "C= 'I own the place' (lie) (requires Charisma 10)"
-puts "D= 'Only for special occasions'"
+puts "'Do you work out?'"
+
+puts "A= 'All the time, I love exercise'(req strength 4)"
+puts "B= 'No'"
+puts "C= *Flexs* (req strength 6)"
+puts "D= 'yeah I enjoy it but it can be a bit boring by myself'"
 
 selection = gets.chomp.upcase.to_sym
 
-puts date.question2[:options][selection][:output]
-puts date.question2[:options][selection][:response]
-date.update_flirt(date.question2[:options][selection][:score])
+puts date.question3[:options][selection][:output]
+puts date.question3[:options][selection][:response]
+date.update_flirt(date.question3[:options][selection][:score])
 
 date.mood
 

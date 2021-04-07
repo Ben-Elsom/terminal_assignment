@@ -1,3 +1,6 @@
+traits = ["loves Naruto", "loves sport", "loves cats", "loves dogs", "loves exercise", "loves to party", "loves space", "loves cooking", "loves rick and Morty"]
+
+
 
 Choose your opening line 
     
@@ -48,6 +51,19 @@ Do you work out?
 
 -	Yeah I enjoy it but it can be a bit boring by myself.  +3
         “well maybe I could join you one day”
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
 What do you do for a living 
 -	"I’m a student at Coder academy" (req intelligence 5)     + 5 if passed, minus 1 if failed.

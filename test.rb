@@ -1,7 +1,7 @@
 girl_names = ["Olivia", "Emma", "Ava", "Sophia", "Isabella", "Charlotte", "Amelia", "Mia", "Harper", "Evelyn"]
-    boy_names = ["Liam", "Noah", "Oliver", "William", "James", "Benjamin", "Lucas"]
-    unisex_names = ["Cameron", "Billie", "Kit", "Kai", "Riley", "Baily", "Charlie", "Drew"]
-    traits = ["hates music", "loves Naruto", "loves sport", "loves cats", "loves dogs", "loves exercise", "loves to party", "loves space", "loves cooking", "loves rick and Morty"]
+boy_names = ["Liam", "Noah", "Oliver", "William", "James", "Benjamin", "Lucas"]
+unisex_names = ["Cameron", "Billie", "Kit", "Kai", "Riley", "Baily", "Charlie", "Drew"]
+traits = ["loves Naruto", "loves sport", "loves cats", "loves dogs", "loves exercise", "loves to party", "loves space", "loves cooking", "loves rick and Morty"]
     
 
 
@@ -24,90 +24,61 @@ end
 
 
 class Person
-    attr_reader :question2, :question3
-    def initialize(gender, name, traits)
-        @gender = gender,
-        @name = name,
-        @trait = traits,
-        @flirt_score = 0
-        generate_questions()
-    end
-    def generate_questions
-        # CSV magic
-        # question,outputA,traitA,scoreA,resonseA, outputB,traitB,scoreB,resonseA
-        # Do you come here often?,All the time I love to party,loves to party,3,oh that's cool,Nah,,0,oh ok
-        
-        # CSV.open |line|
-        #     questions.push({
-            #         question: line[0],
-            #         options: {
-                #             A: {
-                    #                 selection: "a",
-                    #                 output: line[1],
-                    #                 trait: line[2]
-                #             }, B: { line[3], lin[4]}
-                    #         }
-                    #     })
-                    
-    # Do you come here often?,All the time I love to party|loves to party|3|oh that's cool,Nah||0|oh ok, |||, |||
-        # CSV.open |line|
-            # options = []
-            # # line.slice(1)
-            # arrays = [line[1], line[2], line[3], line[4]]
-            # arrays.each_with_index do |subarray, index|
-            #     selection = nil
-            #     if index == 0
-            #         selection = "a"
-            #     else
-            #         selection = "b"
-            #     end
-            #     subarray.split!("|")
-            #     options.push({
-            #         selection: selection,
-            #         output: subarray[0],
-            #         trait: subarray[1],
-            #         score: subarray[2],
-            #         response: subarray[3]
-            #     })
-            # end
-            # questions.push({
-            #     question: line[0],
-            #     options: options
-            # })
+    attr_accessor :question2, :flirt_score
 
+    def initialize(gender, name, traits)
+        @gender = gender
+        @name = name
+        @trait = traits
+        @flirt_score = 0
         @question2 = {
-            question: "Do you come here often?", 
             options: {
                 A: {
-                    selection: "a",
-                    output: "All the time, I love to party",
-                    trait: "loves to party",
+                    output: "You: 'All the time, I love to party'",
+                    # trait: "loves to party",
                     score: 3,
                     # special_score: 10, 
-                    response: "oh that's cool",
+                    response: "Date: 'oh that's cool'"
                     # special_response: “Omg I love to party too, that’s so cool”,
                     },
-                {
-                    selection: "b",
+                B:  {
                     output: "Nah",
                     response: "Oh ok",
                     score: 0,
                 },
-                {   selection: "c",
+                C:  {  
                     output: "I own the place (lie) (requires Charisma 10)",
                     score: 10,
                     response: "WOW that is super impressive!",
                     # failed_score: -5,
                     # failed_response: “Urgh why do you feel the need to lie to me”,
                 },
-                {   selection: "d",
+                D:  { 
                     output: "Only for special occasions",
                     score: 3,
                     response: "I guess I am special then hehe",
                 }
             }
         }
-    end 
+    end
+
+    def mood
+
+        case @flirt_score
+        when 41..50 
+            puts "I think I can ask them for their number now"
+        when 31..40 
+            puts "they look like they are having a fantastic time"
+        when 21..30 
+            puts "they look like they're having fun"
+        when 11..20 
+            puts "they look like they're having a good enough time"
+        when 0..10
+            puts "They look like they'd rather be somewhere else, but I guess I'll keep trying"
+        end 
+    end
+
+        
 
     def update_flirt(score)
         @flirt_score += score
@@ -116,12 +87,37 @@ end
 
     
 
-date = Person.new(gender, traits.sample(2), date_name)
+date = Person.new(gender, date_name, traits.sample(2))
 
-p date.question2[:question]
-    
-response = gets.chomp.upcase.to_sym
-puts date.question2[:options][response][:output]
-date.flirt_score += date.question2[:options][response][:score]
+puts "Do you come here often?"
 
-puts date.flirt_score
+puts "A= 'All the time, I love to party'"
+puts "B= 'Nah'"
+puts "C= 'I own the place' (lie) (requires Charisma 10)"
+puts "D= 'Only for special occasions'"
+
+selection = gets.chomp.upcase.to_sym
+
+puts date.question2[:options][selection][:output]
+puts date.question2[:options][selection][:response]
+date.update_flirt(date.question2[:options][selection][:score])
+
+date.mood
+
+puts "Do you come here often?"
+
+puts "A= 'All the time, I love to party'"
+puts "B= 'Nah'"
+puts "C= 'I own the place' (lie) (requires Charisma 10)"
+puts "D= 'Only for special occasions'"
+
+selection = gets.chomp.upcase.to_sym
+
+puts date.question2[:options][selection][:output]
+puts date.question2[:options][selection][:response]
+date.update_flirt(date.question2[:options][selection][:score])
+
+date.mood
+
+
+

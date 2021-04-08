@@ -28,7 +28,7 @@ end
 
 class Person
     attr_accessor :flirt_score, :strength, :intelligence, :charisma
-    attr_reader :name, :trait,:question2, :question3
+    attr_reader :name, :trait, :questions
 
     def initialize(gender, name, traits)
         @gender = gender
@@ -41,7 +41,7 @@ class Person
         @questions = {
             question1: {
                 A: {
-                    output: "You: 'All the time, I love to party'",
+                    output: "'All the time, I love to party'",
                     trait: "Partying",
                     score: 3,
                     special_score: 10, 
@@ -52,15 +52,15 @@ class Person
                     req_charisma: 0,
                     },
                 B:  {
-                    output: "Nah",
-                    response: "Oh ok",
+                    output: "'Nah'",
+                    response: "'Oh ok'",
                     score: 0,
                     req_strength: 0,
                     req_intelligence: 0,
                     req_charisma: 0,
                 },
                 C:  {  
-                    output: "I own the place",
+                    output: "'I own the place'",
                     score: 10,
                     response: "WOW that is super impressive!",
                     req_strength: 0,
@@ -79,17 +79,16 @@ class Person
                 }
             },
         question2: {
-                options: {
                     A: {
                         output: "All the time, I love exercise",
                         trait: "Sport/exercise",
                         score: 3,
                         special_score: 10, 
                         response: "'I can tell'",
-                        special_response: "Omg I love to party too, that’s so cool",
+                        special_response: "'that’s awesome! I love exercise too!'",
                         req_strength: 0,
                         req_intelligence: 0,
-                        req_charisma: 0,
+                        req_charisma: 0
                         },
                     B:  {
                         output: "'No'",
@@ -97,7 +96,7 @@ class Person
                         score: -3,
                         req_strength: 0,
                         req_intelligence: 0,
-                        req_charisma: 0,
+                        req_charisma: 0
                     },
                     C:  {  
                         output: "*Flexs* (req strength 5)",
@@ -118,7 +117,7 @@ class Person
                         req_charisma: 0,
                     }
                 }
-            }
+            }   
     end
 # end of initalize
 
@@ -189,50 +188,42 @@ puts "\nYour date for this evening is #{date.name}. #{date.name} is interested i
 # date.intelligence += intelligence 
 # date.charisma += charisma
 
-puts "Do you come here often?"
 
-puts "A= 'All the time, I love to party'"
-puts "B= 'Nah'"
-puts "C= 'I own the place' (lie) (requires Charisma 10)"
-puts "D= 'Only for special occasions'"
-puts "E= *ask for number*"
-
-selection = gets.chomp.upcase.to_sym
-
-    loop date.questions do |current_question, values|
+    date.questions.each do |current_question, values|
+        puts question[]
         puts "A= #{values[:A][:output]}"
         puts "B= #{values[:B][:output]}"
-        puts "C= #{values[:C][:output]]}"
+        puts "C= #{values[:C][:output]}"
         puts "D= #{values[:D][:output]}"
         puts "E= *ask for number*"
         selection = gets.chomp.upcase.to_sym
+
+        if date.strength < values[selection][:req_strength] 
+            puts "#{values[selection][:failed_response]}"
+            date.update_flirt(values[selection][:failed_score])
+        elsif date.intelligence < values[selection][:req_intelligence]
+            puts "#{values[selection][:failed_response]}"
+            date.update_flirt(values[selection][:failed_score])
+        elsif date.charisma < values[selection][:req_charisma]
+            puts "#{values[selection][:failed_response]}"
+            date.update_flirt(values[selection][:failed_score])
+        else
+            if date.trait.include?(values[selection][:trait])
+                puts "Date: #{values[selection][:special_response]}"
+                date.update_flirt(values[selection][:special_score])
+                puts date.flirt_score
+            else
+                puts "Date: #{values[selection][:response]}"
+                date.update_flirt(values[selection][:score])
+                puts date.flirt_score
+            end
+        end
     end
 
 
 #         puts "You: #{date.questions[:question1][selection][:output]}"
 
 
-#         if date.strength < date.question2[:options][selection][:req_strength] 
-#             puts "Date: #{date.question2[:options][selection][:failed_response]}"
-#             date.update_flirt(date.question2[:options][selection][:failed_score])
-#         elsif date.intelligence < date.question2[:options][selection][:req_intelligence]
-#             puts "Date: #{date.question2[:options][selection][:failed_response]}"
-#             date.update_flirt(date.question2[:options][selection][:failed_score])
-#         elsif date.charisma < date.question2[:options][selection][:req_charisma]
-#             puts "Date: #{date.question2[:options][selection][:failed_response]}"
-#             date.update_flirt(date.question2[:options][selection][:failed_score])
-#         else
-        
-
-#             if date.trait.include?(date.question2[:options][selection][:trait])
-#                 puts "Date: #{date.question2[:options][selection][:special_response]}"
-#                 date.update_flirt(date.question2[:options][selection][:special_score])
-#                 puts date.flirt_score
-#             else
-#                 puts "Date: #{date.question2[:options][selection][:response]}"
-#                 date.update_flirt(date.question2[:options][selection][:score])
-#                 date.flirt_score
-#             end
-#         end
+#         
 #     end
 

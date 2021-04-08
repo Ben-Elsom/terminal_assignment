@@ -8,7 +8,7 @@ girl_names = ["Olivia", "Emma", "Ava", "Sophia", "Isabella", "Charlotte", "Ameli
 boy_names = ["Liam", "Noah", "Oliver", "William", "James", "Benjamin", "Lucas"]
 unisex_names = ["Cameron", "Billie", "Kit", "Kai", "Riley", "Baily", "Charlie", "Drew"]
 traits = ["Naruto", "Sport/exercise"]
-    # "Cats", "Dogs", "Partying", "Outer-Space", "Cooking", "Rick and Morty"]
+    # "Cats", "Dogs", "Partying", "Outer-Space", "Cooking", "Rick and Morty", "Video games"]
     
 puts "Please enter your name"
 user_name = gets.chomp.capitalize
@@ -43,24 +43,50 @@ class Person
                     "'Do you work out?'",
                     "'What do you do for a living?'",
                     "'Do you watch anime?'",
-                    "'Do you do any sports?'"],
+                    "'Do you do any sports?'",
+                    "'What’s your favourite animal?'",
+                    "'What do you like to do in your free time?'",
+                    "'Who is the most fascinating person you've ever met?'",
+                    "'What music do you listen to?'",
+                    "'What would be your dream job?'",
+                    "'What would you do if you had enough money to not need a job?'",
+                    "'Among your friends, what are you best know for?'",
+                    "'What is an accomplishment that you are really proud of?'",
+                    "What kind of people are your people'"
+                    
+                    
+                ],
                 A: {
                     output: ["'All the time, I love to party'", 
                             "'All the time, I love exercise'",
                             "'I’m a student at Coder academy'", 
                             "'Eww no!'", 
-                            "'Yeah I like a lot of sports'"],
-                    trait: ["Partying", "Sport/exercise","~","Naruto","sport/exercise" ],
-                    score: [3, 3, 3, -1, 3],
-                    ht_score: [10, 5, 0, -3, 5],
-                    failed_score: [0, 0, -1, 0],
-                    response: ["'Oh cool, It's nice here'", "'I can tell'", "'Wow, you must be really smart'", "'Wow that was dramatic'", "'Oh cool, sports are pretty cool'"],
-                    has_trait_response: ["'Omg I love to party too! that’s so cool'", "that’s awesome! I love exercise too!", "", "Oh Damn ok", "'that’s awesome I love sports too'" ],
-                    failed_response: ["","", "'as if, only smart people go there'","",""],
-                    req_strength: [0,0,0,0,0],
-                    req_intelligence: [0,0,5,0,0],
-                    req_charisma: [0,0,0,0,0],
-                    requires: ["","", "(Requires 5 Intelligence)", ""]
+                            "'Yeah I like a lot of sports'",
+                            "'I love cats!'",
+                            "'Depends who i'm with'",
+                            "'Donald Trump, great guy'",
+                            "'Jake Paul's music",
+                            "'Software developer'",
+                            "'Charity work'",
+                            "'Dating beautiful partners'",
+                            "'I don't have any'",
+                            "'Who needs other people when I have you'"
+
+
+
+
+                        ],
+                    trait: ["Partying", "Sport/exercise","~","Naruto","sport/exercise", "Cats", "~", "~", "~", "~", "~", "~", "~", "~"],
+                    score: [3, 3, 3, -1, 3, 3, 5, -3, -3, 3, 3, 5, -3, 10 ],
+                    ht_score: [10, 5, 0, -3, 5, 10, 0, 0, 0, 0, 0, 0, 0, 0],
+                    failed_score: [0, 0, -1, 0, 0, -3, 0, 0, -3, 0, -3, 0, -5],
+                    response: ["'Oh cool, It's nice here'", "'I can tell'", "'Wow, you must be really smart'", "'Wow that was dramatic'", "'Oh cool, sports are pretty cool'", "yeah they’re pretty cute", "'hehehe :)'", "'Oh, You like Trump? Ok...'", "'ah ok, Not really my type pf music'", "'nerd :P, nah that’s awesome'", "''That's so kind", "'hehehe'", "'Ok nevermind then'", "'hehehe you're such a flirt'"],
+                    has_trait_response: ["'Omg I love to party too! that’s so cool'", "that’s awesome! I love exercise too!", "", "Oh Damn ok", "'that’s awesome I love sports too'", "'I love cats too! You have to come over and meet my cats some time'", "", "","", "", "", "", "", ""],
+                    failed_response: ["","", "'as if, only smart people go there'","","", "","urgh cringe", "", "", "As if you could ever", "", "'Urgh smooth dude'", "", "'So you just don't have friends?'"],
+                    req_strength: [0,0,0,0,0,0,0, 0, 0, 0, 0, 0, 0, 0],
+                    req_intelligence: [0,0,5,0,0,0,0, 0, 0, 5, 0, 0, 0, 0],
+                    req_charisma: [0, 0, 0, 0 ,0 ,0 ,7, 0, 0, 0, 0, 7, 0, 10],
+                    requires: ["","", "(Requires 5 Intelligence)", "", "", "(Requires 7 Charisma)", "", "", "(Requires 5 Intelligence)", "", "(Requires 5 Charisma)", "", "(Requires 10 Charisma)"]
                     },
                     
                 B:  {
@@ -68,56 +94,90 @@ class Person
                             "'No'",
                             "I'm a hedgefund manager",
                             "'SASSKUUUEEEE'",
-                            "'Does it look like am the type to like sports?'"],
-                    trait: ["~", "Sports/Exercise", "~", "Naruto", "Sports/Exercise"],
-                    score: [-3, -1, -7, -3, -3],
-                    ht_score: [0, -3, 0, 10, -3],
-                    failed_score: [0,0,-5,0,0],
-                    response: ["'Oh ok, well it's nice here'","'Ok then'", "Wow that's super impressive", "'What the hell dude?'", "'nevermind then'"],
-                    has_trait_response: ["", "", "", "NARRRUUTOOOO", ""],
-                    failed_response: ["","","urgh why do you feel the need to lie to me, anyway...","",""],
-                    req_strength: [0,0,0,0,0],
-                    req_intelligence: [0,0,7,0,0],
-                    req_charisma: [0,0,0,0,0],
-                    requires: ["","","(Requires 7 Intelligence)","",""]
+                            "'Does it look like am the type to like sports?'",
+                            "'I love dogs!'",
+                            "I like to play video gmaes",
+                            "'You'",
+                            "I hate all music",
+                            "Astronaut",
+                            "Play video games",
+                            "'Capable'",
+                            "I built a robot that passes butter",
+                            "'dogs'"
+                        
+                        ],
+                    trait: ["~", "Sports/Exercise", "~", "Naruto", "Sports/Exercise", "Dogs", "Video games", "~", "~", "Outer-space", "Video games", "~", "Rick and Morty", "Dogs"],
+                    score: [-3, -1, -7, -3, -3, 3, 1, 10, -3, 5, 3, 5, 5, 3],
+                    ht_score: [0, -3, 0, 10, -3, 10, 5, 0, 0, 10, 5, 0, 10, 10],
+                    failed_score: [0,0,-5, 0, 0, 0, 0, -5, 0, 0, 0, -1, -3, 0],
+                    response: ["'Oh ok, well it's nice here'","'Ok then'", "Wow that's super impressive", "'What the hell dude?'", "'nevermind then'", "'Yeah they're pretty cute'", "'oh that's pretty cool, I used to play them as a kid'", "'hehehe'", "'oh...  nevermind then'", "'Hell yeah that would be cool'", "'I can vibe with that video games are cool'", "Nice, who doesn't love a capable person'", "'Wow that is insanely inpressive'", "'I can vibe with that'" ],
+                    has_trait_response: ["", "", "", "NARRRUUTOOOO", "", "I love dogs too! You have to come over and meet my dogs some time", "'Oh hell yeah I love video games, we'll have to trade pokemod :P'", "","", "'OMG That’s my dream job as well! It would be SOO cool'", "Hell yeah, love me some video games", "", "'Lmao is that a Rick and Morty joke?'", "'AWWWWWWWWWW'"],
+                    failed_response: ["","","urgh why do you feel the need to lie to me, anyway...","","","","","'Urgh nice try dude'", "", "keep dreamin", "", "HA you? as if", "'Urgh, why do you feel the need to lie to me? Anyway...'", "" ],
+                    req_strength: [0,0,0,0,0,0,0,0, 0, 0, 0, 0, 0, 0],
+                    req_intelligence: [0, 0, 7, 0, 0, 0, 0, 0, 0, 7, 0, 5, 8, 0],
+                    req_charisma: [0,0,0,0,0,0,0,10, 0, 0, 0, 0, 0, 0],
+                    requires: ["","","(Requires 7 Intelligence)","","", "","", "(Requires 10 Charisma", "", "(Requires 7 Intelligence)", "", "(Requires 5 Intelligence)", "(Requires 5 intelligence)", ""]
                 },
                 C:  {  
                     output: ["'I own the place'",
                             "*Flexs*", 
                             "'I'd rather not say...'",
                             "'Does Rick and Morty count?'",
-                            "Watch this *does backflip*"
+                            "'Watch this' *does backflip*",
+                            "'They're all pretty nice'",
+                            "'I love to cook'",
+                            "'I met the queen once'",
+                            "'Depends on my mood'",
+                            "'I don't have one'",
+                            "'IDK sleep I guess'",
+                            "'Incapable'",
+                            "'I won state championships for 200 meter in high school'",
+                            "I don't really like people or have friends"
+
+
+
                         ],
-                    trait: ["~", "~", "~", "Rick and Morty", "~"],
-                    score: [3, 3, -3, 1, 10 ],
-                    ht_score: [10, 7, 0, 7, 0] ,
-                    failed_score: [-5,-5, 0, 0, -5],
-                    response: ["Date: 'oh that's cool'" "Wow, Nice!", "'Oh... ok?'", "'Hahahaha not really :P'", "'WOW! You're amazing'"],
-                    has_trait_response: ["Omg I love to party too! that’s so cool", "", "", "wubbadubba dub dub", ""],
-                    failed_response: ["Urgh why do you feel the need to lie to me", "'urgh nice dude...'", "", "", "'OH no! are you ok? I think you ripped your pant'"],
-                    req_strength: [0, 5, 0, 0, 10],
-                    req_intelligence: [0,0,0,0, 0],
-                    req_charisma: [10,0,0,0, 0],
-                    requires: ["(Requires 10 Charisma)", "(Requires 5 strength)", "", "", "(Requires 10 strength"]
+                    trait: ["~", "~", "~", "Rick and Morty", "~", "~", "~", "~", "~", "~", "~", "~", "Sports/exercise", ""],
+                    score: [10, 3, -3, 1, 10, 0, 3, 1, 1, -3, -3, -3, 5, -5],
+                    ht_score: [0, 7, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0] ,
+                    failed_score: [-5,-5, 0, 0, -5, 0, 0, 0, 0, 0, 0, 0, -5, 0],
+                    response: ["'WOW that is super impressive!'", "Wow, Nice!", "'Oh... ok?'", "'Hahahaha not really :P'", "'WOW! You're amazing'", "'Cool...'", "'Nice! You can cook for me :P'", "Nice", "Fair me too I guess", "'Ok then'", "'Cool...'", "'Ok dude'", "'Damn dude that's awesome'", "'That's sorta creepy'"],
+                    has_trait_response: ["", "", "", "wubbadubba dub dub", "", "", "", "", "", "", "", "", "'Man you're so impressive'", ""],
+                    failed_response: ["Urgh why do you feel the need to lie to me", "'urgh nice dude...'", "", "", "'OH no! are you ok? I think you ripped your pant'", "", "", "", "", "", "", "", "Urgh why do you feel the need to lie to me", ""],
+                    req_strength: [0, 5, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 8, 0],
+                    req_intelligence: [0,0,0,0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    req_charisma: [10,0,0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ,
+                    requires: ["(Requires 10 Charisma)", "(Requires 5 strength)", "", "", "(Requires 10 strength", "", "", "", "", "", "", "", "(Requires 8 Stregth)", ""]
                 },
                 D:  { 
                     output: ["'Only for special occasions'",
                             "'Yeah I enjoy it but it can be a bit boring by myself'",
                             "'I'm an athlete'",
                             "not much",
-                            "only the big games"
+                            "only the big games",
+                            "'I hate animals'",
+                            "'Stalk pretty girls home heheh'",
+                            "'I meet Snoop Dogg once'",
+                            "'I love a lot of music honestly'",
+                            "'Actor'",
+                            "Probably part", 
+                            "'Being funny'",
+                            "'I can do the hand signs for Fire-ball-jutsu from Naruto'",
+                            "'Brilliant people'"
+
+
                     ],
-                    trait: ["~", "~", "sports/exercise", "~", "~"],
-                    score: [3, 3, 5, 0, 1],
-                    ht_score: [0, 0, 10, -1 , 0],
-                    failed_score: [0, 0, -5, 0, 0 ],
-                    response: ["Date: 'oh that's cool'", "'well maybe I could join you one day'", "'wow that’s pretty cool'", "oh ok", "cool" ],
-                    has_trait_response: ["", "", "'“WOW! That’s super damn impressive! I’d love to see you compete some time'", "'oh ok. well I like it'", "" ],
-                    failed_response: ["","", "'why do you feel the need to lie to me?'", "", ],
-                    req_strength: [0, 0, 6, 0,0],
-                    req_intelligence: [0,0, 6, 0, 0],
-                    req_charisma: [0, 0, 6, 0, 0],
-                    requires: ["","", "(Requires 6 strength)", "", ""]
+                    trait: ["~", "~", "sports/exercise", "~", "~", "~", "~", "~", "~", "~", "Partying", "~", "Naruto", ""],
+                    score: [3, 3, 5, 0, 1, -5, -10,  3, 3, 3, 3, 3, -3, 5],
+                    ht_score: [0, 0, 10, -1 , 0, 0, 0, 0, 0, 0, 0, 0, 5, 0 ],
+                    failed_score: [0, 0, -5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3],
+                    response: ["Date: 'oh that's cool'", "'well maybe I could join you one day'", "'wow that’s pretty cool'", "oh ok", "cool" , "'What the hell man?!'", "'What the hell man?! Not funny at all'", "'that dope hahah'", "'I love that'", "Yeah that would be cool", "'That sounds pretty fun'", "'I believe it'", "'That's the acomplishment you're most proud of?!'", "'I can't wait to meet your friends'"],
+                    has_trait_response: ["", "", "'“WOW! That’s super damn impressive! I’d love to see you compete some time'", "'oh ok. well I like it'", "", "", "", "", "", "", "Awesome! Me too", "", "'Really?! I've always wanted to be able to do that. You HAVE to teach me.'", "" ],
+                    failed_response: ["","", "'why do you feel the need to lie to me?'", "", "", "", "", "", "", "", "", "", "'Wow that was a bit pretemtious wasn't it? Anyway'"],
+                    req_strength: [0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    req_intelligence: [0,0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+                    req_charisma: [0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    requires: ["","", "(Requires 6 strength)", "", "", "", "", "", "", "", "", "", "", "(Requires 8 Intellience)"]
                 }
             }
     end
@@ -160,7 +220,7 @@ class Person
     end
 
     def update_flirt(score)
-        @flirt_score += score
+        @flirt_score += score.to_i
     end
 end 
 
@@ -217,7 +277,7 @@ i = 0
             else
                 if date.trait.include?(date.questions[selection][:trait][i])
                     puts "#{date.name}: #{date.questions[selection][:has_trait_response][i]}"
-                    date.update_flirt(date.questions[selection][:special_score][i])
+                    date.update_flirt(date.questions[selection][:has_trait_response][i])
                     puts date.flirt_score
                 else
                     puts "#{date.name}: #{date.questions[selection][:response][i]}"
@@ -228,3 +288,5 @@ i = 0
         end
         i += 1
     end
+
+    puts "You took too long and #{date.name} got away"

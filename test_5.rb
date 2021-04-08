@@ -7,7 +7,8 @@ prompt = TTY::Prompt.new
 girl_names = ["Olivia", "Emma", "Ava", "Sophia", "Isabella", "Charlotte", "Amelia", "Mia", "Chelsey", "Evelyn"]
 boy_names = ["Liam", "Noah", "Oliver", "William", "James", "Benjamin", "Lucas"]
 unisex_names = ["Cameron", "Billie", "Kit", "Kai", "Riley", "Baily", "Charlie", "Drew"]
-traits = ["Naruto", "Sport/exercise", "Cats", "Dogs", "Partying", "Outer-Space", "Cooking", "Rick and Morty"]
+traits = ["Naruto", "Sport/exercise"]
+    # "Cats", "Dogs", "Partying", "Outer-Space", "Cooking", "Rick and Morty"]
     
 puts "Please enter your name"
 user_name = gets.chomp.capitalize
@@ -38,7 +39,6 @@ class Person
         @intelligence = 0
         @charisma = 0
         @questions = {
-            question1: {
                 prompt: ["'Do you come here often?'", 
                     "'Do you work out?'",
                     "'What do you do for a living?'",
@@ -54,14 +54,13 @@ class Person
                     score: [3, 3, 3, -1, 3],
                     ht_score: [10, 5, 0, -3, 5],
                     failed_score: [0, 0, -1, 0],
-                    response: ["'Date: 'oh that's cool'","'I can tell'","", "Wow that was dramatic"],
-                    has_trait_response: ["'Omg I love to party too! that’s so cool'", "that’s awesome! I love exercise too!", "", "Oh Damn ok" ],
-                    passed_response: ["","","'Wow, you must be really smart'","",""],
-                    failed_response: ["","", "as if","",""],
+                    response: ["'Oh cool, It's nice here'", "'I can tell'", "'Wow, you must be really smart'", "'Wow that was dramatic'", "'Oh cool, sports are pretty cool'"],
+                    has_trait_response: ["'Omg I love to party too! that’s so cool'", "that’s awesome! I love exercise too!", "", "Oh Damn ok", "'that’s awesome I love sports too'" ],
+                    failed_response: ["","", "'as if, only smart people go there'","",""],
                     req_strength: [0,0,0,0,0],
                     req_intelligence: [0,0,5,0,0],
                     req_charisma: [0,0,0,0,0],
-                    requires: ["","", "(10 Intelligence)", ""]
+                    requires: ["","", "(Requires 5 Intelligence)", ""]
                     },
                     
                 B:  {
@@ -120,8 +119,7 @@ class Person
                     req_charisma: [0, 0, 6, 0, 0],
                     requires: ["","", "(Requires 6 strength)", "", ""]
                 }
-            },
-       }   
+            }
     end
 # end of initalize
 
@@ -186,18 +184,19 @@ until valid_input
 end
 
 puts "\n"
+i = 0
 
-    date.questions.each do |current_question, values|
-        selection = prompt.select("#{date.name}: #{values[:prompt]}\n", ["#{values[:A][:output]}", "#{values[:B][:output]}", "#{values[:C][:output]}", "#{values[:D][:output]}", "*ask for number*"])
+    5.times do 
+        selection = prompt.select("#{date.name}: #{date.questions[:prompt][i]}\n", ["#{date.questions[:A][:output][i]} #{date.questions[:A][:requires][i]}", "#{date.questions[:B][:output][i]} #{date.questions[:B][:requires][i]}", "#{date.questions[:C][:output][i]} #{date.questions[:C][:requires][i]}", "#{date.questions[:D][:output][i]} #{date.questions[:D][:requires][i]}", "*ask for number*"])
 
         case selection
-        when "#{values[:A][:output]}"
+        when "#{date.questions[:A][:output][i]} #{date.questions[:A][:requires][i]}"
             selection = :A
-        when "#{values[:B][:output]}"
+        when "#{date.questions[:B][:output][i]} #{date.questions[:B][:requires][i]}"
             selection = :B
-        when "#{values[:C][:output]}"
+        when "#{date.questions[:C][:output][i]} #{date.questions[:C][:requires][i]}"
             selection = :C
-        when "#{values[:D][:output]}"
+        when "#{date.questions[:D][:output][i]} #{date.questions[:D][:requires][i]}"
             selection = :D
         when "*ask for number*"
             selection = :E
@@ -206,25 +205,26 @@ puts "\n"
         if selection == :E
             date.ask_number
         else
-            if date.strength < values[selection][:req_strength] 
-                puts "#{date.name}: #{values[selection][:failed_response]}"
-                date.update_flirt(values[selection][:failed_score])
-            elsif date.intelligence < values[selection][:req_intelligence]
-                puts "#{date.name}: #{values[selection][:failed_response]}"
-                date.update_flirt(values[selection][:failed_score])
-            elsif date.charisma < values[selection][:req_charisma]
-                puts "#{date.name}: #{values[selection][:failed_response]}"
-                date.update_flirt(values[selection][:failed_score])
+            if date.strength < date.questions[selection][:req_strength][i]
+                puts "#{date.name}: #{date.questions[selection][:failed_response][i]}"
+                date.update_flirt(date.questions[selection][:failed_score][i])
+            elsif date.intelligence < date.questions[selection][:req_intelligence][i]
+                puts "#{date.name}: #{date.questions[selection][:failed_response][i]}"
+                date.update_flirt(date.questions[selection][:failed_score][i])
+            elsif date.charisma < date.questions[selection][:req_charisma][i]
+                puts "#{date.name}: #{date.questions[selection][:failed_response][i]}"
+                date.update_flirt(date.questions[selection][:failed_score][i])
             else
-                if date.trait.include?(values[selection][:trait])
-                    puts "#{date.name}: #{values[selection][:special_response]}"
-                    date.update_flirt(values[selection][:special_score])
+                if date.trait.include?(date.questions[selection][:trait][i])
+                    puts "#{date.name}: #{date.questions[selection][:has_trait_response][i]}"
+                    date.update_flirt(date.questions[selection][:special_score][i])
                     puts date.flirt_score
                 else
-                    puts "#{date.name}: #{values[selection][:response]}"
-                    date.update_flirt(values[selection][:score])
+                    puts "#{date.name}: #{date.questions[selection][:response][i]}"
+                    date.update_flirt(date.questions[selection][:score][i])
                     puts date.flirt_score
                 end
             end
         end
+        i += 1
     end

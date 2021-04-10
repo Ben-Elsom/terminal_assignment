@@ -1,5 +1,7 @@
 
 require "tty-prompt"
+require 'colorized_string' 
+require 'colorize'
 
 prompt = TTY::Prompt.new
 
@@ -10,7 +12,26 @@ boy_names = ["Liam", "Noah", "Oliver", "William", "James", "Benjamin", "Lucas"]
 unisex_names = ["Cameron", "Billie", "Kit", "Kai", "Riley", "Baily", "Charlie", "Drew"]
 traits = ["Naruto", "Sport/exercise", "Cats", "Dogs", "Partying", "Outer-Space", "Cooking", "Rick and Morty", "Video games"]
 
-    
+
+
+
+
+
+difficulty = "Medium"
+
+if ARGV[0]
+    difficulty = ARGV[0].capitalize
+end
+
+
+if difficulty == "Easy"
+    num_of_attributes = 30
+elsif difficulty == "Medium"
+    num_of_attributes = 20
+elsif difficulty == "Hard"
+    num_of_attributes = 10
+end
+ARGV.clear
 puts "Please enter your name:"
 user_name = gets.chomp.capitalize
 
@@ -26,6 +47,9 @@ case gender
         date_name = unisex_names.sample
 end
 
+print "\e[2J\e[f"
+
+
 
 class Person
     attr_accessor :flirt_score, :strength, :intelligence, :charisma
@@ -35,7 +59,7 @@ class Person
         @gender = gender
         @name = date_name
         @trait = traits
-        @flirt_score = 0
+        @flirt_score = 5
         @strength = 0
         @intelligence = 0
         @charisma = 0
@@ -78,7 +102,7 @@ class Person
 
                         ],
                     trait: ["Partying", "Sport/exercise","~","Naruto","Sport/exercise", "Cats", "~", "~", "~", "~", "~", "~", "~", "~"],
-                    score: [3, 3, 3, -1, 3, 3, 7, -3, -3, 3, 3, 5, -3, 10],
+                    score: [3, 3, 5, -1, 3, 3, 7, -3, -3, 3, 3, 5, -3, 10],
                     ht_score: [10, 5, 0, -3, 5, 10, 0, 0, 0, 0, 0, 0, 0, 0],
                     failed_score: [0, 0, -1, 0, 0, 0, -3, 0, 0, -3, 0, -3, 0, -5],
                     response: ["'Oh cool, It's nice here'", "'I can tell'", "'Wow, you must be really smart'", "'Wow that was dramatic'", "'Oh cool, sports are pretty cool'", "yeah they’re pretty cute", "'hehehe :)'", "'Oh, You like Trump? Ok...'", "'ah ok, Not really my type pf music'", "'nerd :P, nah that’s awesome'", "''That's so kind", "'hehehe'", "'Ok nevermind then'", "'hehehe you're such a flirt'"],
@@ -87,7 +111,7 @@ class Person
                     req_strength: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     req_intelligence: [0, 0, 5, 0, 0, 0 ,0, 0, 0, 5, 0, 0, 0, 0],
                     req_charisma: [0, 0, 0, 0, 0 ,0 ,7 , 0, 0, 0, 0, 7, 0, 10],
-                    requires: ["", "", "(Requires 5 Intelligence)", "", "", "",  "(Requires 7 Charisma)", "", "", "(Requires 5 Intelligence)", "", "(Requires 5 Charisma)", "", "(Requires 10 Charisma)"]
+                    requires: ["", "", "(Requires 5 Intelligence)", "", "", "",  "(Requires 7 Charisma)", "", "", "(Requires 5 Intelligence)", "", "(Requires 7 Charisma)", "", "(Requires 10 Charisma)"]
                     },
                     
                 B:  {
@@ -117,7 +141,7 @@ class Person
                     req_strength: [0,0,0,0,0,0,0,0, 0, 0, 0, 0, 0, 0],
                     req_intelligence: [0, 0, 7, 0, 0, 0, 0, 0, 0, 7, 0, 5, 8, 0],
                     req_charisma: [0,0,0,0,0,0,0,10, 0, 0, 0, 0, 0, 0],
-                    requires: ["","","(Requires 7 Intelligence)","","", "","", "(Requires 10 Charisma)", "", "(Requires 7 Intelligence)", "", "(Requires 5 Intelligence)", "(Requires 5 intelligence)", ""]
+                    requires: ["","","(Requires 7 Intelligence)","","", "","", "(Requires 10 Charisma)", "", "(Requires 7 Intelligence)", "", "(Requires 5 Intelligence)", "(Requires 8 intelligence)", ""]
                 },
                 C:  {  
                     output: ["'I own the place'",
@@ -154,7 +178,7 @@ class Person
                     output: ["'Only for special occasions'",
                             "'Yeah I enjoy it but it can be a bit boring by myself'",
                             "'I'm an athlete'",
-                            "not much",
+                            "'not much'",
                             "'only the big games'",
                             "'I hate animals'",
                             "'Stalk pretty girls home heheh'",
@@ -184,22 +208,7 @@ class Person
     end
 # end of initalize
 
-    def mood
-        case @flirt_score
-        when 41..50 
-            puts "\nI think I can ask them for their number now"
-        when 31..40 
-            puts "\nThey look like they are having a fantastic time"
-        when 21..30 
-            puts "\nThey look like they're having fun"
-        when 11..20 
-            puts "\nThey look like they're having a good enough time"
-        when 0..10
-            puts "\nThey look like they'd rather be somewhere else, but I guess I'll keep trying"
-        end 
-    end 
-
-    def ask_number
+    def ask_number(i)
         if @flirt_score >= 50
             print "\e[2J\e[f"
             puts "Yeah ok, I'll give you my number. One final question though. \nWhat's my name?"
@@ -207,15 +216,17 @@ class Person
             if name_guess == @name
                 puts "'Ok, yeah you can have my number. Here you go' *give number*"
                 puts "YOU WIN!"
+                puts "You completed the game in #{i} questions, see if you can beat it next time"
                 exit
             else 
-                puts "my name is #{@name}"
-                puts "I can't believe I was going to give you my number. Get lost"
-                puts "YOU LOSE!"
+                puts "'My name is #{@name}...'"
+                puts "'I can't believe I was going to give you my number. Get lost'"
+                puts "'YOU LOSE!'"
                 exit
             end
         else
-            puts "Ha! as if. Get lost"
+            puts "'Ha! as if. Get lost'"
+            puts "#{@name}'s flirt score was only #{@flirt_score} when you asked them out"
             puts "YOU LOSE!"
             exit
         end
@@ -226,18 +237,32 @@ class Person
     end
 end 
 
+# end of person class
 
 date = Person.new(gender, date_name, traits.sample(2) )
-puts "\nYour date for this evening is #{date.name}. #{date.name} is interested in #{date.trait[0]} and #{date.trait[1]} \n"
+
+
+puts "Instructions"
+
+puts "You are meeting your date for tonight at 'The Black Cabin' the coolest club in Brisbane.\nYou have been searching on Tinder for someone to to go out with and have finally found someone to go out with. #{date_name} \n "
+puts "#{date_name} is interested in #{date.trait[0]} and #{date.trait[1]}. \nRemember these ^^ as responses that incorporate them will be worth more."
+puts "Increase #{date_name}'s flirt score by choosing the most correct responses. If their flirt score drops to 0 they will leave so be careful.\nOnce #{date_name}'s flirt score it is greater than or equal to 50 ask #{date_name} for their number (Their flirt_score starts at 5). If you ask them for their number before your flirt score is above 50 then you will lose. \n  "
+
+puts "Choose your responses by using the arrow keys and hitting enter or enter details using the keyboard with either letter or numbers where appropriate. \n "
+
+prompt.select("Once you have read the rules hit enter", ["Next"])
+
+print "\e[2J\e[f"
+
 
 valid_input = false
 until valid_input 
-    puts "Please choose your skills for this evening (maxium 20)"
+    puts "Please choose your skills for this evening (maximum #{num_of_attributes})"
     date.strength = prompt.ask("How much Strength would you like: 0-10?") { |q| q.in("0-10") }.to_i
     date.intelligence = prompt.ask("How much Intelligence would you like: 0-10?") { |q| q.in("0-10") }.to_i
     date.charisma = prompt.ask("How much Charisma would you like: 0-10?") { |q| q.in("0-10") }.to_i
 
-    if date.strength + date.intelligence + date.charisma > 20 
+    if date.strength + date.intelligence + date.charisma > num_of_attributes
         puts "You have entered in too many skill points. Please try again"
     else 
         valid_input = true
@@ -254,7 +279,6 @@ end
 
 print "\e[2J\e[f"
 
-puts "\n"
 i = 0
 
     date.questions[:prompt].length.times do 
@@ -274,39 +298,52 @@ i = 0
         end
 
         if selection == :E
-            date.ask_number
+            date.ask_number(i)
         else
             if date.strength < date.questions[selection][:req_strength][i]
                 puts "#{date.name}: #{date.questions[selection][:failed_response][i]}"
                 date.update_flirt(date.questions[selection][:failed_score][i])
-                puts date.flirt_score
+                date.questions[selection][:failed_score][i]
+                puts "Flirt score = #{date.flirt_score} \n "
             elsif date.intelligence < date.questions[selection][:req_intelligence][i]
                 puts "#{date.name}: #{date.questions[selection][:failed_response][i]}"
                 date.update_flirt(date.questions[selection][:failed_score][i])
-                puts date.flirt_score
+                date.questions[selection][:failed_score][i]
+                puts "Flirt score = #{date.flirt_score} \n "
             elsif date.charisma < date.questions[selection][:req_charisma][i]
                 puts "#{date.name}: #{date.questions[selection][:failed_response][i]}"
                 date.update_flirt(date.questions[selection][:failed_score][i])
-                puts date.flirt_score
+                date.questions[selection][:failed_score][i]
+                puts "Flirt score = #{date.flirt_score} \n "
             else
                 if date.trait.include?(date.questions[selection][:trait][i])
                     puts "#{date.name}: #{date.questions[selection][:has_trait_response][i]}"
                     date.update_flirt(date.questions[selection][:ht_score][i])
-                    puts date.flirt_score
+                    date.questions[selection][:ht_score][i]
+                    puts "Flirt score = #{date.flirt_score} \n "
                 else
                     puts "#{date.name}: #{date.questions[selection][:response][i]}"
                     date.update_flirt(date.questions[selection][:score][i])
-                    puts date.flirt_score
+                    puts date.questions[selection][:score][i]
+                    puts "Flirt score = #{date.flirt_score} \n " 
                 end
             end
         end
         if date.flirt_score < 0 
-            puts "#{date.name}: 'Sorry I'm not really feeling these. I'm going to go home'"
-            puts "#{date.name} has left. YOU LOSE"
+            puts "#{date.name}: 'Sorry I'm not really feeling this. I'm going to go home'"
+            puts "#{date.name}'s flirst score dropped below 0 and has left. YOU LOSE"
             exit
         end
         
         i += 1
     end
 
-    puts "You took too long and #{date.name} got away"
+    final_attempt = prompt.select("#{date.name}: 'Sorry I've run out of time, I've got to go. It was nice meeting you'", ["'Hey before you go, can I get your number'", "'See ya!'"])
+
+    if final_attempt == "'Hey before you go, can I get your number'"
+        date.ask_number
+    end
+
+    puts "You took too long and #{date.name} got away. YOU LOSE"
+
+    

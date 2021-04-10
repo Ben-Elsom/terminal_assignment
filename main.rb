@@ -1,21 +1,16 @@
 
 require "tty-prompt"
-require 'colorized_string' 
 require 'colorize'
+# gems required
 
 prompt = TTY::Prompt.new
 
 print "\e[2J\e[f"
 
 girl_names = ["Olivia", "Emma", "Ava", "Sophia", "Isabella", "Charlotte", "Amelia", "Mia", "Chelsey", "Evelyn"]
-boy_names = ["Liam", "Noah", "Oliver", "William", "James", "Benjamin", "Lucas"]
+boy_names = ["Liam", "Noah", "Oliver", "William", "Tim", "Benjamin", "Lucas"]
 unisex_names = ["Cameron", "Billie", "Kit", "Kai", "Riley", "Baily", "Charlie", "Drew"]
 traits = ["Naruto", "Sport/exercise", "Cats", "Dogs", "Partying", "Outer-Space", "Cooking", "Rick and Morty", "Video games"]
-
-
-
-
-
 
 difficulty = "Medium"
 
@@ -23,20 +18,18 @@ if ARGV[0]
     difficulty = ARGV[0].capitalize
 end
 
-
 if difficulty == "Easy"
-    num_of_attributes = 30
-elsif difficulty == "Medium"
     num_of_attributes = 20
-elsif difficulty == "Hard"
+elsif difficulty == "Medium"
     num_of_attributes = 10
+elsif difficulty == "Hard"
+    num_of_attributes = 5
 end
 ARGV.clear
 puts "Please enter your name:"
 user_name = gets.chomp.capitalize
 
 gender = prompt.select("Ok #{user_name}, Which gender would you like to meet this evening", ["I would like to meet a boy", "I would like to meet a girl", "Undefined"])
-
 
 case gender
     when "I would like to meet a boy"
@@ -48,8 +41,6 @@ case gender
 end
 
 print "\e[2J\e[f"
-
-
 
 class Person
     attr_accessor :flirt_score, :strength, :intelligence, :charisma
@@ -78,8 +69,6 @@ class Person
                     "'Among your friends, what are you best know for?'",
                     "'What is an accomplishment that you are really proud of?'",
                     "'What kind of people are your people?''"
-                    
-                    
                 ],
                 A: {
                     output: ["'All the time, I love to party'", 
@@ -96,10 +85,6 @@ class Person
                             "'Dating beautiful partners'",
                             "'I don't have any'",
                             "'Who needs other people when I have you'"
-
-
-
-
                         ],
                     trait: ["Partying", "Sport/exercise","~","Naruto","Sport/exercise", "Cats", "~", "~", "~", "~", "~", "~", "~", "~"],
                     score: [3, 3, 5, -1, 3, 3, 7, -3, -3, 3, 3, 5, -3, 10],
@@ -129,7 +114,6 @@ class Person
                             "'Capable'",
                             "'I built a robot that passes butter'",
                             "'Dogs'"
-                        
                         ],
                     trait: ["~", "Sports/Exercise", "~", "Naruto", "Sports/Exercise", "Dogs", "Video games", "~", "~", "Outer-space", "Video games", "~", "Rick and Morty", "Dogs"],
                     score: [-3, -1, -7, -3, -3, 3, 1, 10, -3, 5, 3, 5, 5, 3],
@@ -137,7 +121,7 @@ class Person
                     failed_score: [0, 0, -5, 0, 0, 0, 0, -5, 0, 0, 0, -1, -3, 0],
                     response: ["'Oh ok, well it's nice here'","'Ok then'", "Wow that's super impressive", "'What the hell dude?'", "'nevermind then'", "'Yeah they're pretty cute'", "'oh that's pretty cool, I used to play them as a kid'", "'hehehe'", "'oh...  nevermind then'", "'Hell yeah that would be cool'", "'I can vibe with that video games are cool'", "Nice, who doesn't love a capable person'", "'Wow that is insanely inpressive'", "'I can vibe with that'" ],
                     has_trait_response: ["", "", "", "'NARRRUUTOOOO'", "", "I love dogs too! You have to come over and meet my dogs some time", "'Oh hell yeah I love video games, we'll have to trade pokemod :P'", "","", "'OMG That’s my dream job as well! It would be SOO cool'", "Hell yeah, love me some video games", "", "'Lmao is that a Rick and Morty joke?'", "'AWWWWWWWWWW'"],
-                    failed_response: ["","","urgh why do you feel the need to lie to me, anyway...","","","","","'Urgh nice try dude'", "", "keep dreamin", "", "HA you? as if", "'Urgh, why do you feel the need to lie to me? Anyway...'", "" ],
+                    failed_response: ["","","'urgh why do you feel the need to lie to me, anyway...'","","","","","'Urgh nice try dude'", "", "keep dreamin", "", "HA you? as if", "'Urgh, why do you feel the need to lie to me? Anyway...'", "" ],
                     req_strength: [0,0,0,0,0,0,0,0, 0, 0, 0, 0, 0, 0],
                     req_intelligence: [0, 0, 7, 0, 0, 0, 0, 0, 0, 7, 0, 5, 8, 0],
                     req_charisma: [0,0,0,0,0,0,0,10, 0, 0, 0, 0, 0, 0],
@@ -158,9 +142,6 @@ class Person
                             "'Incapable'",
                             "'I won state championships for 200 meter in high school'",
                             "'I don't really like people or have friends'"
-
-
-
                         ],
                     trait: ["~", "~", "~", "Rick and Morty", "~", "~", "~", "~", "~", "~", "~", "~", "Sports/exercise", ""],
                     score: [10, 5, -3, 1, 10, 0, 3, 1, 1, -3, -3, -3, 5, -5],
@@ -168,7 +149,7 @@ class Person
                     failed_score: [-5,-5, 0, 0, -5, 0, 0, 0, 0, 0, 0, 0, -5, 0],
                     response: ["'WOW that is super impressive!'", "Wow, Nice!", "'Oh... ok?'", "'Hahahaha not really :P'", "'WOW! You're amazing'", "'Cool...'", "'Nice! You can cook for me :P'", "Nice", "Fair me too I guess", "'Ok then'", "'Cool...'", "'Ok dude'", "'Damn dude that's awesome'", "'That's sorta creepy'"],
                     has_trait_response: ["", "", "", "wubbadubba dub dub", "", "", "", "", "", "", "", "", "'Man you're so impressive'", ""],
-                    failed_response: ["Urgh why do you feel the need to lie to me", "'urgh nice dude...'", "", "", "'OH no! are you ok? I think you ripped your pant'", "", "", "", "", "", "", "", "Urgh why do you feel the need to lie to me", ""],
+                    failed_response: ["'Urgh why do you feel the need to lie to me'", "'urgh nice dude...'", "", "", "'OH no! are you ok? I think you ripped your pant'", "", "", "", "", "", "", "", "Urgh why do you feel the need to lie to me", ""],
                     req_strength: [0, 5, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 8, 0],
                     req_intelligence: [0,0,0,0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0],
                     req_charisma: [10,0,0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ,
@@ -189,8 +170,6 @@ class Person
                             "'Being funny'",
                             "'I can do the hand signs for Fire-ball-jutsu from Naruto'",
                             "'Brilliant people'"
-
-
                     ],
                     trait: ["~", "~", "sports/exercise", "~", "~", "~", "~", "~", "~", "~", "Partying", "~", "Naruto", ""],
                     score: [5, 3, 5, 0, 1, -5, -10,  3, 3, 3, 3, 3, -3, 5],
@@ -211,7 +190,7 @@ class Person
     def ask_number(i)
         if @flirt_score >= 50
             print "\e[2J\e[f"
-            puts "Yeah ok, I'll give you my number. One final question though. \nWhat's my name?"
+            puts "Yeah ok, I'll give you my number. Two final questions though. \nWhat's my name?"
             name_guess = gets.chomp.capitalize
             if name_guess == @name
                 puts "'Ok, yeah you can have my number. Here you go' *give number*"
@@ -237,23 +216,36 @@ class Person
     end
 end 
 
+def final_intelligence_question
+    begin
+    puts "What's 37 * 4"
+    answer = gets.chomp.to_i
+    puts "well here's how smart I am. What would you like me to divide that number by?"
+    divide_number = gets.chomp.to_i
+    puts "#{answer / divide_number}"
+
+
+    rescue 
+        you 
+
+end 
 # end of person class
 
 date = Person.new(gender, date_name, traits.sample(2) )
-
 
 puts "Instructions"
 
 puts "You are meeting your date for tonight at 'The Black Cabin' the coolest club in Brisbane.\nYou have been searching on Tinder for someone to to go out with and have finally found someone to go out with. #{date_name} \n "
 puts "#{date_name} is interested in #{date.trait[0]} and #{date.trait[1]}. \nRemember these ^^ as responses that incorporate them will be worth more."
-puts "Increase #{date_name}'s flirt score by choosing the most correct responses. If their flirt score drops to 0 they will leave so be careful.\nOnce #{date_name}'s flirt score it is greater than or equal to 50 ask #{date_name} for their number (Their flirt_score starts at 5). If you ask them for their number before your flirt score is above 50 then you will lose. \n  "
+puts "Increase #{date_name}'s flirt score by choosing the most correct responses. If their flirt score drops to 0 they will leave so be careful.\nOnce #{date_name}'s flirt score it is greater than or equal to 50 ask #{date_name} for their number (Their flirt_score starts at 5)."
+puts "If you ask them for their number before your flirt score is above 50 then you will lose. "
+puts "Once you hit next you will be asked to input your skill for the game. Please do this by entering in a number between 0 and 10 aon the keyboard  "
 
 puts "Choose your responses by using the arrow keys and hitting enter or enter details using the keyboard with either letter or numbers where appropriate. \n "
 
 prompt.select("Once you have read the rules hit enter", ["Next"])
 
 print "\e[2J\e[f"
-
 
 valid_input = false
 until valid_input 
@@ -269,8 +261,6 @@ until valid_input
     end
 end
 
-
-
 is_ready = prompt.select("Are you ready?", ["Begin", "Quit"])
 
 if is_ready == "Quit"
@@ -281,69 +271,64 @@ print "\e[2J\e[f"
 
 i = 0
 
-    date.questions[:prompt].length.times do 
-        selection = prompt.select("#{date.name}: #{date.questions[:prompt][i]}\n", ["#{date.questions[:A][:output][i]} #{date.questions[:A][:requires][i]}", "#{date.questions[:B][:output][i]} #{date.questions[:B][:requires][i]}", "#{date.questions[:C][:output][i]} #{date.questions[:C][:requires][i]}", "#{date.questions[:D][:output][i]} #{date.questions[:D][:requires][i]}", "*ask for number*"])
+date.questions[:prompt].length.times do 
+    selection = prompt.select("#{date.name}: #{date.questions[:prompt][i]}\n", ["#{date.questions[:A][:output][i]} #{date.questions[:A][:requires][i]}", "#{date.questions[:B][:output][i]} #{date.questions[:B][:requires][i]}", "#{date.questions[:C][:output][i]} #{date.questions[:C][:requires][i]}", "#{date.questions[:D][:output][i]} #{date.questions[:D][:requires][i]}", "*ask for number*"])
 
-        case selection
-        when "#{date.questions[:A][:output][i]} #{date.questions[:A][:requires][i]}"
-            selection = :A
-        when "#{date.questions[:B][:output][i]} #{date.questions[:B][:requires][i]}"
-            selection = :B
-        when "#{date.questions[:C][:output][i]} #{date.questions[:C][:requires][i]}"
-            selection = :C
-        when "#{date.questions[:D][:output][i]} #{date.questions[:D][:requires][i]}"
-            selection = :D
-        when "*ask for number*"
-            selection = :E
-        end
+    case selection
+    when "#{date.questions[:A][:output][i]} #{date.questions[:A][:requires][i]}"
+        selection = :A
+    when "#{date.questions[:B][:output][i]} #{date.questions[:B][:requires][i]}"
+        selection = :B
+    when "#{date.questions[:C][:output][i]} #{date.questions[:C][:requires][i]}"
+        selection = :C
+    when "#{date.questions[:D][:output][i]} #{date.questions[:D][:requires][i]}"
+        selection = :D
+    when "*ask for number*"
+        selection = :E
+    end
 
         if selection == :E
             date.ask_number(i)
         else
-            if date.strength < date.questions[selection][:req_strength][i]
+            if date.strength < date.questions[selection][:req_strength][i] or date.intelligence < date.questions[selection][:req_intelligence][i] or date.charisma < date.questions[selection][:req_charisma][i]
                 puts "#{date.name}: #{date.questions[selection][:failed_response][i]}"
                 date.update_flirt(date.questions[selection][:failed_score][i])
-                date.questions[selection][:failed_score][i]
-                puts "Flirt score = #{date.flirt_score} \n "
-            elsif date.intelligence < date.questions[selection][:req_intelligence][i]
-                puts "#{date.name}: #{date.questions[selection][:failed_response][i]}"
-                date.update_flirt(date.questions[selection][:failed_score][i])
-                date.questions[selection][:failed_score][i]
-                puts "Flirt score = #{date.flirt_score} \n "
-            elsif date.charisma < date.questions[selection][:req_charisma][i]
-                puts "#{date.name}: #{date.questions[selection][:failed_response][i]}"
-                date.update_flirt(date.questions[selection][:failed_score][i])
-                date.questions[selection][:failed_score][i]
+                puts date.questions[selection][:failed_score][i].to_s.colorize(:red)
                 puts "Flirt score = #{date.flirt_score} \n "
             else
                 if date.trait.include?(date.questions[selection][:trait][i])
                     puts "#{date.name}: #{date.questions[selection][:has_trait_response][i]}"
                     date.update_flirt(date.questions[selection][:ht_score][i])
-                    date.questions[selection][:ht_score][i]
+                    if date.questions[selection][:ht_score][i] >= 0
+                        puts "#{date.questions[selection][:ht_score][i].to_s}".colorize(:green)
+                    else date.questions[selection][:ht_score][i] < 0
+                        puts "#{date.questions[selection][:ht_score][i].to_s}".colorize(:red)
+                    end
                     puts "Flirt score = #{date.flirt_score} \n "
                 else
                     puts "#{date.name}: #{date.questions[selection][:response][i]}"
                     date.update_flirt(date.questions[selection][:score][i])
-                    puts date.questions[selection][:score][i]
+                    if date.questions[selection][:ht_score][i] >= 0
+                        puts "+#{date.questions[selection][:score][i].to_s}".colorize(:green)
+                    else date.questions[selection][:ht_score][i] < 0
+                        puts "#{date.questions[selection][:score][i].to_s}".colorize(:red)
+                    end
                     puts "Flirt score = #{date.flirt_score} \n " 
                 end
             end
         end
-        if date.flirt_score < 0 
+        if date.flirt_score <= 0 
             puts "#{date.name}: 'Sorry I'm not really feeling this. I'm going to go home'"
             puts "#{date.name}'s flirst score dropped below 0 and has left. YOU LOSE"
             exit
         end
-        
         i += 1
     end
 
-    final_attempt = prompt.select("#{date.name}: 'Sorry I've run out of time, I've got to go. It was nice meeting you'", ["'Hey before you go, can I get your number'", "'See ya!'"])
+final_attempt = prompt.select("#{date.name}: 'Sorry I've run out of time, I've got to go. It was nice meeting you'", ["'Hey before you go, can I get your number'", "'See ya!'"])
 
-    if final_attempt == "'Hey before you go, can I get your number'"
-        date.ask_number
-    end
+if final_attempt == "'Hey before you go, can I get your number'"
+    date.ask_number
+end
 
-    puts "You took too long and #{date.name} got away. YOU LOSE"
-
-    
+puts "You took too long and #{date.name} got away. YOU LOSE"

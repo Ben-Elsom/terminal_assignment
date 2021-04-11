@@ -1,6 +1,7 @@
 
 require "tty-prompt"
 require 'colorize'
+require_relative 'errors'
 # gems required
 
 prompt = TTY::Prompt.new
@@ -26,9 +27,18 @@ elsif difficulty == "Hard"
     num_of_attributes = 5
 end
 ARGV.clear
+name_empty = true
+while name_empty
 puts "Please enter your name:"
-user_name = gets.chomp.capitalize
-
+    begin
+        user_name = gets.capitalize.strip
+        raise Emptyfield if user_name.class == NilClass or user_name == ""
+    rescue Emptyfield
+        puts "Please enter something in this field"
+    else 
+        name_empty = false
+    end
+end
 gender = prompt.select("Ok #{user_name}, Which gender would you like to meet this evening", ["I would like to meet a boy", "I would like to meet a girl", "Undefined"])
 
 case gender
@@ -50,7 +60,7 @@ class Person
         @gender = gender
         @name = date_name
         @trait = traits
-        @flirt_score = 5
+        @flirt_score = 50
         @strength = 0
         @intelligence = 0
         @charisma = 0
@@ -216,19 +226,8 @@ class Person
     end
 end 
 
-def final_intelligence_question
-    begin
-    puts "What's 37 * 4"
-    answer = gets.chomp.to_i
-    puts "well here's how smart I am. What would you like me to divide that number by?"
-    divide_number = gets.chomp.to_i
-    puts "#{answer / divide_number}"
 
 
-    rescue 
-        you 
-
-end 
 # end of person class
 
 date = Person.new(gender, date_name, traits.sample(2) )
@@ -300,7 +299,7 @@ date.questions[:prompt].length.times do
                     puts "#{date.name}: #{date.questions[selection][:has_trait_response][i]}"
                     date.update_flirt(date.questions[selection][:ht_score][i])
                     if date.questions[selection][:ht_score][i] >= 0
-                        puts "#{date.questions[selection][:ht_score][i].to_s}".colorize(:green)
+                        puts "+#{date.questions[selection][:ht_score][i].to_s}".colorize(:green)
                     else date.questions[selection][:ht_score][i] < 0
                         puts "#{date.questions[selection][:ht_score][i].to_s}".colorize(:red)
                     end
@@ -308,9 +307,9 @@ date.questions[:prompt].length.times do
                 else
                     puts "#{date.name}: #{date.questions[selection][:response][i]}"
                     date.update_flirt(date.questions[selection][:score][i])
-                    if date.questions[selection][:ht_score][i] >= 0
+                    if date.questions[selection][:score][i] >= 0
                         puts "+#{date.questions[selection][:score][i].to_s}".colorize(:green)
-                    else date.questions[selection][:ht_score][i] < 0
+                    else date.questions[selection][:score][i] < 0
                         puts "#{date.questions[selection][:score][i].to_s}".colorize(:red)
                     end
                     puts "Flirt score = #{date.flirt_score} \n " 
@@ -328,7 +327,7 @@ date.questions[:prompt].length.times do
 final_attempt = prompt.select("#{date.name}: 'Sorry I've run out of time, I've got to go. It was nice meeting you'", ["'Hey before you go, can I get your number'", "'See ya!'"])
 
 if final_attempt == "'Hey before you go, can I get your number'"
-    date.ask_number
+    date.ask_number(i)
 end
 
 puts "You took too long and #{date.name} got away. YOU LOSE"

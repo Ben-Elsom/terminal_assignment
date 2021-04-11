@@ -73,5 +73,35 @@ https://trello.com/invite/b/VImcqzOO/e318cc6e2cf0ee906914c15e6269fba3/dating-ter
 You must include:
 
 - steps to install the application
-- any dependencies required by the application to operate
+Upload the main.rb file to your desktop, make sure you have at least ruby 2.7.2 installed. You can either bundle add unit-test, colorize and TTY prompt or install each of the gems and their dependacies individually. These are listed here 
+ colorize (0.8.1)
+    diff-lcs (1.4.4)
+    pastel (0.8.0)
+      tty-color (~> 0.5)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
+    rspec-core (3.10.1)
+      rspec-support (~> 3.10.0)
+    rspec-expectations (3.10.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-mocks (3.10.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-support (3.10.2)
+    tty-color (0.6.0)
+    tty-cursor (0.7.1)
+    tty-prompt (0.23.0)
+      pastel (~> 0.8)
+      tty-reader (~> 0.8)
+    tty-reader (0.9.0)
+      tty-cursor (~> 0.7)
+      tty-screen (~> 0.8)
+      wisper (~> 2.0)
+    tty-screen (0.8.1)
+    wisper (2.0.1)
+  
 - any system/hardware requirements
+As this program is quite small I am not going to give any hardware requirments as any modern computer can easily run this program. The computer must have a keyboard to enter in their details. 

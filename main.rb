@@ -5,20 +5,21 @@ require_relative 'errors'
 # gems required
 
 prompt = TTY::Prompt.new
+# making class to make tty prompt work
 
 print "\e[2J\e[f"
+# clears terminal from previous commands to make the game look cleaner
 
 girl_names = ["Olivia", "Emma", "Ava", "Sophia", "Isabella", "Charlotte", "Amelia", "Mia", "Chelsey", "Evelyn"]
 boy_names = ["Liam", "Noah", "Oliver", "William", "Tim", "Benjamin", "Lucas"]
 unisex_names = ["Cameron", "Billie", "Kit", "Kai", "Riley", "Baily", "Charlie", "Drew"]
 traits = ["Naruto", "Sport/exercise", "Cats", "Dogs", "Partying", "Outer-Space", "Cooking", "Rick and Morty", "Video games"]
+# arrays that we pool names and traits from
 
 difficulty = "Medium"
-
 if ARGV[0]
     difficulty = ARGV[0].capitalize
 end
-
 if difficulty == "Easy"
     num_of_attributes = 20
 elsif difficulty == "Medium"
@@ -27,7 +28,8 @@ elsif difficulty == "Hard"
     num_of_attributes = 5
 end
 ARGV.clear
-name_empty = true
+# Command line arguements that set the difficulty of the game 
+name_empty = true 
 while name_empty
 puts "Please enter your name:"
     begin
@@ -39,6 +41,7 @@ puts "Please enter your name:"
         name_empty = false
     end
 end
+# name to recieve name and error handling if they do not enter anything in
 gender = prompt.select("Ok #{user_name}, Which gender would you like to meet this evening", ["I would like to meet a boy", "I would like to meet a girl", "Undefined"])
 
 case gender
@@ -49,9 +52,10 @@ case gender
     when "Undefined"
         date_name = unisex_names.sample
 end
+# code to generate date name and date gender
 
 print "\e[2J\e[f"
-
+# clears screen 
 class Person
     attr_accessor :flirt_score, :strength, :intelligence, :charisma
     attr_reader :name, :trait, :questions
@@ -64,6 +68,7 @@ class Person
         @strength = 0
         @intelligence = 0
         @charisma = 0
+        # these are all of the questions and then each of the response, score, score if they have the relevant trait ect. All of the information for all of the A answer are stored in the arrays together and each of the questions are related using the index of the array 
         @questions = {
                 prompt: ["'Do you come here often?'", 
                     "'Do you work out?'",

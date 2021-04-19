@@ -105,3 +105,8 @@ Upload the main.rb file to your desktop, make sure you have at least ruby 2.7.2 
   
 - any system/hardware requirements
 As this program is quite small I am not going to give any hardware requirments as any modern computer can easily run this program. The computer must have a keyboard to enter in their details. 
+
+HOWEVER my program uses a gem TTY prompt. If you use the bash script to run my main.rb on a windows computer TTY prompt will not work. So be sure to run the main.rb directly or use a IOS operating system
+
+# GIT HUB
+https://github.com/Ben-Elsom/terminal_assignment

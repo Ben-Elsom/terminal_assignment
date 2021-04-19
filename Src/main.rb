@@ -167,7 +167,7 @@ class Person
                     failed_score: [-5,-5, 0, 0, -5, 0, 0, 0, 0, 0, 0, 0, -5, 0],
                     response: ["'WOW that is super impressive!'", "Wow, Nice!", "'Oh... ok?'", "'Hahahaha not really :P'", "'WOW! You're amazing'", "'Cool...'", "'Nice! You can cook for me :P'", "Nice", "Fair me too I guess", "'Ok then'", "'Cool...'", "'Ok dude'", "'Damn dude that's awesome'", "'That's sorta creepy'"],
                     has_trait_response: ["", "", "", "wubbadubba dub dub", "", "", "", "", "", "", "", "", "'Man you're so impressive'", ""],
-                    failed_response: ["'Urgh why do you feel the need to lie to me'", "'urgh nice dude...'", "", "", "'OH no! are you ok? I think you ripped your pant'", "", "", "", "", "", "", "", "Urgh why do you feel the need to lie to me", ""],
+                    failed_response: ["'Urgh why do you feel the need to lie to me'", "'urgh nice dude...'", "", "", "'OH no! are you ok? I think you ripped your pants'", "", "", "", "", "", "", "", "Urgh why do you feel the need to lie to me", ""],
                     req_strength: [0, 5, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 8, 0],
                     req_intelligence: [0,0,0,0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0],
                     req_charisma: [10,0,0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ,
@@ -208,7 +208,7 @@ class Person
     def ask_number(i)
         if @flirt_score >= 50
             print "\e[2J\e[f"
-            puts "Yeah ok, I'll give you my number. Two final questions though. \nWhat's my name?"
+            puts "Yeah ok, I'll give you my number. One final question  \nWhat's my name?"
                     name_guess = gets.capitalize.strip
                     if name_guess == @name
                         puts "'Ok, yeah you can have my number. Here you go' *give number*"
